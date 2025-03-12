@@ -115,6 +115,7 @@
         
         .content-section {
             padding: 30px 60px;
+            scroll-margin-top: 50px; /* Added for smooth scrolling */
         }
         
         .section-heading {
@@ -297,6 +298,13 @@
             line-height: 1.6;
         }
         
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
         .price-tag {
             display: inline-block;
             background-color: white;
@@ -312,6 +320,26 @@
             text-decoration: line-through;
             color: #888;
             margin-right: 10px;
+        }
+        
+        .seller-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #fff;
+            color: var(--primary);
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+        }
+        
+        .seller-button:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
         }
         
         @media (max-width: 768px) {
@@ -333,6 +361,10 @@
                 min-width: 100%;
             }
         }
+        
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
@@ -346,11 +378,13 @@
         </div>
         
         <div class="promotion-banner">
-            <h3 class="promotion-title">공동구매로 더 많은 고객을 만나보세요!</h3>
-            <p class="promotion-desc">셀러 여러분! 이소로운의 베스트셀러 제품을 특별한 혜택과 함께 고객에게 소개하세요. 
-높은 수수료와 함께 샘플 제공, 판매 인센티브까지! 지금 바로 공동구매 셀러로 참여하세요.</p>
-            <div class="price-tag">
-                <span class="original-price">34,300원</span> 24,010원
+            <h3 class="promotion-title">아이를 돌보면서 수익 올리는 기회!</h3>
+            <p class="promotion-desc">당신이 크리에이터라면, 신청 가능합니다. 직접 상품을 판매하고 수익을 올려보세요!</p>
+            <div class="price-container">
+                <div class="price-tag">
+                    <span class="original-price">34,300원</span> 24,010원
+                </div>
+                <a href="#seller-section" class="seller-button">나도 셀러되기</a>
             </div>
         </div>
         
@@ -382,7 +416,7 @@
             </div>
         </div>
         
-        <div class="content-section">
+        <div id="seller-section" class="content-section">
             <h3 class="section-heading">공구 진행 수수료</h3>
             <div class="content-details">
                 <p><span class="highlight">셀러 수수료 30%</span> (부가세 포함)</p>
@@ -433,5 +467,24 @@
             <div class="footer-sub">A M I N O F I T</div>
         </footer>
     </div>
+
+    <script>
+        // Smooth scroll functionality
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
