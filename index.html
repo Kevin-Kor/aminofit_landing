@@ -2,38 +2,51 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Esorowoon 아미노핏 공동구매 제안서</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap');
         
         :root {
             --primary: #1E4D2B;
+            --primary-dark: #173e22;
             --primary-light: #2a6e3c;
             --secondary: #f0f7f0;
             --accent: #ff6b6b;
-            --text: #333;
-            --text-light: #666;
-            --background: #fff;
+            --text: #333333;
+            --text-light: #555555;
+            --heading: #1a1a1a;
+            --background: #ffffff;
             --background-alt: #f8f9fa;
             --border: #e0e0e0;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
             --cta: #FFD700;
             --cta-hover: #F4C430;
+            --cta-text: #000000;
+            --section-spacing: 32px;
+            --card-spacing: 20px;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 62.5%; /* 10px 기준 설정 - rem 계산 용이 */
         }
         
         body {
             background-color: var(--background-alt);
             color: var(--text);
+            font-family: 'Noto Sans KR', sans-serif;
             line-height: 1.6;
-            font-size: 16px; /* 기본 폰트 크기 증가 */
+            font-size: 1.6rem; /* 16px */
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
         }
         
         .container {
@@ -44,78 +57,144 @@
             overflow: hidden;
         }
         
+        /* 헤더 스타일 */
         header {
             background-color: var(--primary);
-            padding: 25px 20px;
+            padding: 3rem 2rem;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-        
-        header:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
         }
         
         header h1 {
             color: white;
-            font-size: 36px; /* 모바일에 맞게 크기 조정 */
+            font-size: 3.6rem; /* 36px */
             font-weight: 900;
-            letter-spacing: 2px;
-            position: relative;
-            margin-bottom: 10px;
+            letter-spacing: 0.2rem;
+            margin: 0;
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .slogan {
-            padding: 16px;
+            padding: 2rem;
             background-color: var(--secondary);
             text-align: center;
             font-style: italic;
-            color: var(--primary);
+            color: var(--primary-dark);
             font-weight: 500;
             border-bottom: 3px solid var(--primary);
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             position: relative;
-            font-size: 16px; /* 슬로건 텍스트 크기 증가 */
+            font-size: 1.7rem; /* 17px */
+            line-height: 1.7;
         }
         
-        .divider {
-            height: 3px;
-            background: linear-gradient(to right, transparent, var(--primary), transparent);
-            margin: 20px 40px; /* 좁은 화면에 맞게 여백 조정 */
-        }
-        
-        .product-image {
-            padding: 30px 20px; /* 패딩 조정 */
+        /* 프로모션 배너 */
+        .promotion-banner {
+            background: linear-gradient(rgba(30, 77, 43, 0.95), rgba(30, 77, 43, 0.95));
+            background-size: cover;
+            background-position: center;
+            padding: 3.2rem 2.4rem;
             text-align: center;
-            background-color: var(--background-alt);
-            scroll-margin-top: 20px;
+            color: white;
+        }
+        
+        .promotion-title {
+            font-size: 2.6rem; /* 26px */
+            margin-bottom: 1.6rem;
+            line-height: 1.4;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .promotion-desc {
+            font-size: 1.8rem; /* 18px */
+            max-width: 90%;
+            margin: 0 auto 2.4rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.4rem;
+            width: 100%;
+        }
+        
+        /* 제품 이미지 */
+        .product-image {
+            padding: 2.4rem;
+            text-align: center;
+            background-color: var(--background);
+            scroll-margin-top: 2rem;
         }
         
         .product-image img {
             max-width: 100%;
             height: auto;
-            border-radius: 15px; /* 약간 더 작게 */
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            border-radius: 1.2rem;
+            box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
-            max-height: 350px; /* 모바일에 맞게 최대 높이 조정 */
+            max-height: 35rem; /* 350px */
+        }
+        
+        /* 기능 카드 그리드 */
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2.4rem;
+            background-color: var(--background-alt);
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 1.2rem;
+            padding: 2.4rem 2rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .feature-icon {
+            font-size: 4rem; /* 40px */
+            color: var(--primary);
+            margin-bottom: 1.6rem;
+        }
+        
+        .feature-title {
+            font-size: 2.2rem; /* 22px */
+            font-weight: bold;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .feature-desc {
+            color: var(--text);
+            font-size: 1.7rem; /* 17px */
+            line-height: 1.5;
+        }
+        
+        /* 내용 섹션 */
+        .content-section {
+            padding: 2.4rem;
+            scroll-margin-top: 5rem;
         }
         
         .section-heading {
             position: relative;
-            margin: 30px 0 15px; /* 상단 마진 늘림 */
-            font-size: 20px; /* 약간 더 크게 */
-            color: var(--primary);
-            padding-left: 15px;
-            transition: all 0.3s ease;
-            line-height: 1.4; /* 줄 간격 늘림 */
+            margin: 3.6rem 0 1.6rem;
+            font-size: 2rem; /* 20px */
+            color: var(--primary-dark);
+            padding-left: 1.4rem;
+            line-height: 1.4;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
         }
         
         .section-heading::before {
@@ -125,101 +204,96 @@
             top: 50%;
             transform: translateY(-50%);
             width: 5px;
-            height: 24px;
+            height: 2.4rem;
             background-color: var(--primary);
             border-radius: 3px;
         }
         
-        .content-section {
-            padding: 20px; /* 패딩 줄임 */
-            scroll-margin-top: 50px;
+        .content-section > .section-heading:first-child {
+            margin-top: 0;
         }
         
         .content-details {
-            margin-left: 15px; /* 약간 줄임 */
-            margin-bottom: 30px;
+            margin-left: 1.6rem;
+            margin-bottom: 3rem;
             background-color: var(--background);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-left: 3px solid var(--primary-light);
         }
         
         .content-details p {
-            margin-bottom: 12px; /* 약간 늘림 */
-            font-size: 16px; /* 텍스트 크기 증가 */
-            line-height: 1.6; /* 줄 간격 추가 */
+            margin-bottom: 1.2rem;
+            font-size: 1.6rem; /* 16px */
+            line-height: 1.7;
+            word-break: keep-all; /* 단어 분리 방지 */
+        }
+        
+        .content-details p:last-child {
+            margin-bottom: 0;
         }
         
         .highlight {
             color: var(--primary);
             font-weight: bold;
-            font-size: 18px; /* 강조 텍스트 크기 증가 */
+            font-size: 1.8rem; /* 18px */
         }
         
         .small-text {
-            font-size: 14px; /* 약간 크게 */
+            font-size: 1.5rem; /* 15px */
             color: var(--text-light);
-            margin-top: 8px;
-            line-height: 1.5; /* 줄 간격 추가 */
+            margin-top: 0.8rem;
+            line-height: 1.5;
         }
         
-        footer {
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        footer:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* 버튼 스타일 */
+        .seller-button {
+            display: inline-block;
             width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            max-width: 28rem; /* 280px */
+            padding: 1.6rem 3rem;
+            background: #ffffff;
+            color: var(--primary);
+            font-weight: bold;
+            border-radius: 3rem;
+            text-decoration: none;
+            font-size: 1.8rem; /* 18px */
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         
-        .footer-logo {
-            font-size: 28px; /* 약간 작게 */
-            font-weight: 900;
-            margin-bottom: 15px;
-            position: relative;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-        }
-        
-        .footer-sub {
-            font-size: 16px;
-            letter-spacing: 3px;
-            opacity: 0.9;
+        .seller-button:hover, .seller-button:active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
         
         .cta-container {
             text-align: center;
-            padding: 40px 20px; /* 패딩 조정 */
+            padding: 4rem 2rem;
             background: linear-gradient(to bottom, #ffffff, var(--secondary));
         }
         
         .cta-button {
             display: inline-block;
-            padding: 16px 32px; /* 약간 작게 */
+            width: 100%;
+            max-width: 28rem; /* 280px */
+            padding: 1.8rem 3rem;
             background: var(--cta);
-            color: #333;
+            color: var(--cta-text);
             text-align: center;
-            font-size: 18px; /* 버튼 텍스트 크기 조정 */
+            font-size: 1.8rem; /* 18px */
             font-weight: bold;
             text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.4s ease;
+            border-radius: 3rem;
+            transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
             position: relative;
-            overflow: hidden;
-            width: 90%; /* 모바일에서 너비 제한 */
-            max-width: 300px;
         }
         
         .cta-button:hover, .cta-button:active {
@@ -228,128 +302,180 @@
             background: var(--cta-hover);
         }
         
-        .feature-grid {
-            display: flex;
-            flex-direction: column; /* 모바일에서는 항상 세로로 배치 */
-            gap: 20px;
-            padding: 20px;
-        }
-        
-        .feature-card {
-            width: 100%;
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-        }
-        
-        .feature-icon {
-            font-size: 40px; /* 아이콘 크기 증가 */
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .feature-title {
-            font-size: 20px; /* 제목 크기 증가 */
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
-        
-        .feature-desc {
-            color: var(--text-light);
-            font-size: 16px; /* 설명 텍스트 크기 증가 */
-            line-height: 1.5; /* 줄 간격 추가 */
-        }
-        
-        .promotion-banner {
-            background: linear-gradient(rgba(30, 77, 43, 0.9), rgba(30, 77, 43, 0.95)); /* 배경 어둡게 */
-            background-size: cover;
-            background-position: center;
-            padding: 40px 20px;
-            text-align: center;
+        /* 푸터 */
+        footer {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
             color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
         }
         
-        .promotion-title {
-            font-size: 26px; /* 약간 작게 */
-            margin-bottom: 20px;
-            line-height: 1.3; /* 줄 간격 추가 */
-            font-weight: 700; /* 더 굵게 */
+        .footer-logo {
+            font-size: 2.8rem; /* 28px */
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
         }
         
-        .promotion-desc {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            line-height: 1.6;
+        .footer-sub {
+            font-size: 1.6rem; /* 16px */
+            letter-spacing: 0.3rem;
+            opacity: 0.9;
         }
         
-        .price-container {
+        /* 구분선 */
+        .divider {
+            height: 1px;
+            background-color: rgba(0,0,0,0.1);
+            margin: 1.6rem 0;
+        }
+        
+        /* 섹션 분리 */
+        .section-divider {
+            height: 8px;
+            background-color: var(--background-alt);
+            border: none;
+            margin: 0;
+        }
+        
+        /* 접근성 유틸리티 */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* 터치 타겟 개선 */
+        .touch-target {
+            min-height: 4.4rem; /* 44px */
+            min-width: 4.4rem; /* 44px */
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 20px;
+            justify-content: center;
+        }
+        
+        /* 커스텀 가격 태그 */
+        .price-tag {
+            display: flex;
+            background-color: #fff;
+            border-radius: 0.8rem;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            margin: 1.6rem 0;
             width: 100%;
+            max-width: 28rem;
         }
         
-        .seller-button {
-            display: inline-block;
-            padding: 14px 30px;
-            background: #fff;
-            color: var(--primary);
+        .price-original {
+            flex: 1;
+            padding: 1.2rem;
+            text-decoration: line-through;
+            background-color: rgba(0,0,0,0.05);
+            font-size: 1.7rem;
+            text-align: center;
+            color: #777;
+        }
+        
+        .price-discount {
+            flex: 1.5;
+            padding: 1.2rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary);
-            cursor: pointer;
-            width: 90%; /* 모바일에서 너비 제한 */
-            max-width: 300px;
-            /* 텍스트 주변 여백 증가 */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .seller-button:hover, .seller-button:active {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        html {
-            scroll-behavior: smooth;
+            color: var(--primary);
+            text-align: center;
+            background-color: #fff;
         }
         
         /* 모바일 최적화 추가 스타일 */
-        @media (max-width: 768px) {
-            body {
-                font-size: 16px;
-            }
-            
-            .section-heading {
-                font-size: 20px;
-                padding-left: 12px;
-            }
-            
-            .section-heading::before {
-                width: 4px;
-                height: 20px;
+        @media (max-width: 359px) {
+            /* 매우 작은 모바일 기기용 */
+            html {
+                font-size: 58%; /* 약간 더 작게 조정 */
             }
             
             .content-details {
-                padding: 16px;
-                margin-left: 10px;
+                margin-left: 0.8rem;
+                padding: 1.6rem;
             }
             
-            /* 섹션 구분선 추가 */
-            .content-section > h3:not(:first-child) {
-                margin-top: 40px;
-                padding-top: 5px;
+            .section-heading {
+                padding-left: 1.2rem;
+            }
+        }
+        
+        @media (min-width: 360px) and (max-width: 480px) {
+            /* 작은 모바일 기기용 */
+            html {
+                font-size: 60%;
+            }
+            
+            .content-details {
+                padding: 1.8rem;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            /* 큰 모바일/태블릿 기기용 */
+            .feature-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+                gap: 2rem;
+            }
+            
+            .content-details p {
+                max-width: 60ch; /* 가독성 좋은 줄 길이 제한 */
+            }
+        }
+        
+        @media (min-width: 769px) {
+            /* 태블릿 이상의 화면용 */
+            .container {
+                max-width: 76.8rem; /* 768px */
+                margin: 0 auto;
+                border-radius: 1.2rem;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .feature-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.4rem;
+                padding: 3.2rem;
+            }
+            
+            .content-section {
+                padding: 3.2rem 4rem;
+            }
+            
+            .promotion-desc {
+                max-width: 60rem; /* 600px */
+            }
+        }
+        
+        /* 프린트 최적화 */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+                font-size: 11pt;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            .cta-container, .seller-button, .cta-button {
+                display: none;
             }
         }
     </style>
@@ -365,40 +491,46 @@
         </div>
         
         <div class="promotion-banner">
-            <h3 class="promotion-title">아이를 돌보면서 수익 올리는 기회!</h3>
+            <h2 class="promotion-title">아이를 돌보면서 수익 올리는 기회!</h2>
             <p class="promotion-desc">당신이 크리에이터라면, 신청 가능합니다. 직접 상품을 판매하고 수익을 올려보세요!</p>
             <div class="price-container">
-                <a href="#product-section" class="seller-button">나도 셀러되기</a>
+                <a href="#product-section" class="seller-button" role="button">나도 셀러되기</a>
             </div>
         </div>
+        
+        <hr class="section-divider">
         
         <div id="product-section" class="product-image">
             <img src="https://imgur.com/31fUbNp.jpg" alt="아미노핏 아이 제품 이미지">
         </div>
         
+        <hr class="section-divider">
+        
         <div class="feature-grid">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-flask"></i>
+                    <i class="fas fa-flask" aria-hidden="true"></i>
                 </div>
-                <h4 class="feature-title">프리미엄 원료</h4>
+                <h3 class="feature-title">프리미엄 원료</h3>
                 <p class="feature-desc">BCAA, 황기추출물, 초유단백분말 등 엄선된 원료만을 사용합니다.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-arrow-up"></i>
+                    <i class="fas fa-arrow-up" aria-hidden="true"></i>
                 </div>
-                <h4 class="feature-title">성장 지원</h4>
+                <h3 class="feature-title">성장 지원</h3>
                 <p class="feature-desc">성장기 아이들의 근육과 뼈 발달에 필요한 영양소를 공급합니다.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-candy-cane"></i>
+                    <i class="fas fa-candy-cane" aria-hidden="true"></i>
                 </div>
-                <h4 class="feature-title">맛있는 젤리</h4>
+                <h3 class="feature-title">맛있는 젤리</h3>
                 <p class="feature-desc">아이들이 좋아하는 맛과 식감으로 거부감 없이 섭취할 수 있습니다.</p>
             </div>
         </div>
+        
+        <hr class="section-divider">
         
         <div id="seller-section" class="content-section">
             <h3 class="section-heading">공구 진행 수수료</h3>
@@ -417,6 +549,12 @@
             <div class="content-details">
                 <p>- 아미노핏 아이 정가 : <span class="highlight">34,300원</span></p>
                 <p>- 공구가 (30% 할인) : <span class="highlight">24,010원</span></p>
+                
+                <div class="price-tag">
+                    <div class="price-original">34,300원</div>
+                    <div class="price-discount">24,010원</div>
+                </div>
+                
                 <p class="small-text">* 무료배송 (제주 2,000원 / 도서산간 지역 5,000원 추가)</p>
                 <p class="small-text">* 최소 주문 수량 : 10개 이상</p>
             </div>
@@ -442,8 +580,10 @@
             </div>
         </div>
         
+        <hr class="section-divider">
+        
         <div class="cta-container">
-            <a href="https://tally.so/r/316GOM" target="_blank" class="cta-button">공구 셀러로 참여하기</a>
+            <a href="https://tally.so/r/316GOM" target="_blank" class="cta-button" role="button">공구 셀러로 참여하기</a>
         </div>
         
         <footer>
@@ -462,8 +602,10 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
+                    const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    
                     window.scrollTo({
-                        top: targetElement.offsetTop,
+                        top: offsetTop,
                         behavior: 'smooth'
                     });
                 }
